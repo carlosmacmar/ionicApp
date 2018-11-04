@@ -7,14 +7,14 @@
 <ion-content padding center text-center>
 
   <h2>Introduce ingredientes a buscar:</h2>
-  <ion-item>
-    <ion-label floating>Ingredientes</ion-label>
+  <ion-item class="input">
+    <ion-label color="light" floating>Ingredientes</ion-label>
     <ion-input type="text" [(ngModel)]="ingredients"></ion-input>
   </ion-item>
 
   <ion-row>
     <ion-col text-center>
-      <button ion-button block color="primary" (click)="onSearch()">Buscar</button>
+      <button ion-button round color="primary" (click)="onSearch()">Buscar</button>
     </ion-col>
   </ion-row>
 </ion-content>

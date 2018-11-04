@@ -25,4 +25,10 @@ page-favs {
           margin-right: auto;
         }
     }  
+
+    ion-content{
+        background-image: url("../../assets/fav_bg.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
 }

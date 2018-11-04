@@ -39,6 +39,7 @@
         <splash density="port-xhdpi" src="resources/android/splash/drawable-port-xhdpi-screen.png" />
         <splash density="port-xxhdpi" src="resources/android/splash/drawable-port-xxhdpi-screen.png" />
         <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
+        <preference name="android-manifest/application/activity/@android:windowSoftInputMode" value="adjustPan" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
@@ -86,5 +87,6 @@
     <plugin name="cordova-plugin-themeablebrowser" spec="0.2.17" />
     <plugin name="cordova-sqlite-storage" spec="2.5.1" />
     <plugin name="cordova-plugin-x-toast" spec="2.7.0" />
+    <plugin name="cordova-custom-config" spec="^5.0.2" />
     <engine name="android" spec="^7.1.1" />
 </widget>

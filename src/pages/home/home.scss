@@ -4,7 +4,26 @@ page-home {
         color: white;
         padding: 10px;
     }
+
+    h2 {
+        color: white;
+    }
+
+    button {
+        margin-top: 8%!important;
+    }
+
+    .input {
+        background-color: transparent!important;
+        color: white;
+    }
+
+    ion-content{
+        margin-top: 10%;
+        background-image: url("../../assets/cook_bg.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    
 }
-ion-content{
-    margin-top: 10%;
-}
+
