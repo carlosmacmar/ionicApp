@@ -1,0 +1,15 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Recetas</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="card-background-page">
+  <ion-card *ngFor="let recipe of recipes" (click)="onOpenRecipe(recipe.source_url)"> 
+    <img [src]="recipe.image_url"/>
+    <div class="card-title">{{ recipe.title }}</div>
+  </ion-card>
+</ion-content>
