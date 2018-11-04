@@ -12,7 +12,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Proveedor1Provider } from '../providers/proveedor1/proveedor1';
 import { HttpClientModule } from "@angular/common/http";
-import { InAppBrowser } from "@ionic-native/in-app-browser";
+import { ThemeableBrowser } from "@ionic-native/themeable-browser";
 
 @NgModule({
   declarations: [
@@ -40,7 +40,7 @@ import { InAppBrowser } from "@ionic-native/in-app-browser";
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Proveedor1Provider,
-    InAppBrowser
+    ThemeableBrowser
   ]
 })
 export class AppModule {}
