@@ -12,9 +12,9 @@ import { DatabaseProvider } from "../../providers/database/database";
 })
 export class RecipesPage {
 
-  recipes
-  recipesFav
-  recipeTouched
+  recipes: any;
+  recipeTouched: any;
+  recipesFav: any;
 
   constructor(
     public navCtrl: NavController,
@@ -27,9 +27,17 @@ export class RecipesPage {
       this.recipes = navParams.get("recipes");
   }
 
-  onOpenRecipe(recipe){
-    this.recipeTouched = recipe;
+  ionViewWillEnter() {
+    setTimeout(() => {
+      this.database.getAllRecipes().then( (data) => {
+        this.recipesFav = data;
+      }, (error) => {
+        console.log(error);
+      });
+    }, 200);
+  }
 
+  onOpenRecipe(recipe){
     const browserOptions: ThemeableBrowserOptions = {
       statusbar: {
           color: '#FF8C00'
@@ -63,21 +71,42 @@ export class RecipesPage {
     const browser: ThemeableBrowserObject = this.themeableBrowser.create(recipe.source_url, '_blank', browserOptions);
 
     browser.on('favPressed').subscribe(data => {
-      this.database.addRecipe(recipe.title, recipe.source_url, recipe.image_url)
-      .then( (data) => {
-        this.toast.show('Receta guardada', '3000', 'center').subscribe(
-          toast => {
-            this.navCtrl.popToRoot();
-          }
-        );
-      }, (error) => {
-        this.toast.show('Error', '3000', 'center').subscribe(
-          toast => {
-            this.navCtrl.popToRoot();
-          }
-        );
-        console.log(error);
-      });
+      if(this.recipesFav.find(recipeChecking => recipeChecking.source_url == recipe.source_url))
+      {
+        this.database.deleteRecipe(recipe.source_url)
+        .then( (data) => {
+          this.toast.show('Receta eliminada de favoritos', '3000', 'center').subscribe(
+            toast => {
+              this.navCtrl.popToRoot();
+            }
+          );
+        }, (error) => {
+          this.toast.show('Error', '3000', 'center').subscribe(
+            toast => {
+              this.navCtrl.popToRoot();
+            }
+          );
+          console.log(error);
+        });
+      }
+      else
+      {
+        this.database.addRecipe(recipe.title, recipe.source_url, recipe.image_url)
+        .then( (data) => {
+          this.toast.show('Receta añadida a favoritos', '3000', 'center').subscribe(
+            toast => {
+              this.navCtrl.popToRoot();
+            }
+          );
+        }, (error) => {
+          this.toast.show('Error', '3000', 'center').subscribe(
+            toast => {
+              this.navCtrl.popToRoot();
+            }
+          );
+          console.log(error);
+        });
+      }
     });
   }
 

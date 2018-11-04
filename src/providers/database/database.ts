@@ -37,6 +37,18 @@ export class DatabaseProvider {
     });
   }
 
+  deleteRecipe(source_url: string){
+    return new Promise((resolve, reject) => {
+      let sql = "DELETE FROM recipes WHERE source_url=?";
+      this.db.executeSql(sql, [source_url])
+        .then((data) => {
+          resolve(data);
+        }, (error) => {
+          reject(error);
+        });
+    });
+  }
+
   getAllRecipes(){
     return new Promise ((resolve, reject) => {
       this.db.executeSql("SELECT * FROM recipes", [])
@@ -45,7 +57,6 @@ export class DatabaseProvider {
         if (data.rows.length > 0) {
           for (var i = 0; i < data.rows.length; i++) {
             arrayRecipes.push({
-              id: data.rows.item(i).id,
               title: data.rows.item(i).title,
               source_url: data.rows.item(i).source_url,
               image_url: data.rows.item(i).image_url
