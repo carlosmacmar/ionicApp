@@ -24,7 +24,7 @@ export class HomePage {
   onSearch(){
     this.presentLoadingDefault();
 
-    this.proveedor.getRecipes(this.ingredients)
+    this.proveedor.getRecipes(this.ingredients.replace(/\s/g, ""))
       .subscribe(
         (data) => {
           this.recipes = data['recipes'];

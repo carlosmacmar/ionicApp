@@ -32,9 +32,7 @@ export class FavsPage {
         console.log(this.recipesFav);
       }, (error) => {
         this.toast.show('No tienes favoritos', '3000', 'center').subscribe(
-          toast => {
-            this.navCtrl.popToRoot();
-          }
+          toast => {}
         );
         console.log(error);
       });
@@ -80,15 +78,11 @@ export class FavsPage {
         this.database.deleteRecipe(recipe.source_url)
         .then( (data) => {
           this.toast.show('Receta eliminada de favoritos', '3000', 'center').subscribe(
-            toast => {
-              this.navCtrl.popToRoot();
-            }
+            toast => {}
           );
         }, (error) => {
           this.toast.show('Error', '3000', 'center').subscribe(
-            toast => {
-              this.navCtrl.popToRoot();
-            }
+            toast => {}
           );
           console.log(error);
         });
@@ -98,15 +92,11 @@ export class FavsPage {
         this.database.addRecipe(recipe.title, recipe.source_url, recipe.image_url)
         .then( (data) => {
           this.toast.show('Receta añadida a favoritos', '3000', 'center').subscribe(
-            toast => {
-              this.navCtrl.popToRoot();
-            }
+            toast => {}
           );
         }, (error) => {
           this.toast.show('Error', '3000', 'center').subscribe(
-            toast => {
-              this.navCtrl.popToRoot();
-            }
+            toast => {}
           );
           console.log(error);
         });
