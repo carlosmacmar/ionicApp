@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ThemeableBrowser, ThemeableBrowserOptions, ThemeableBrowserObject } from '@ionic-native/themeable-browser';
+import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
+import { Toast } from '@ionic-native/toast';
+import { DatabaseProvider } from "../../providers/database/database";
 
 @IonicPage()
 @Component({
@@ -10,18 +13,23 @@ import { ThemeableBrowser, ThemeableBrowserOptions, ThemeableBrowserObject } fro
 export class RecipesPage {
 
   recipes
+  recipesFav
+  recipeTouched
 
-  constructor(public navCtrl: NavController,
-              public navParams: NavParams,
-              private themeableBrowser: ThemeableBrowser) {
-    this.recipes = navParams.get("recipes");
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private themeableBrowser: ThemeableBrowser,
+    private sqlite: SQLite,
+    private toast: Toast,
+    private database: DatabaseProvider) 
+    {
+      this.recipes = navParams.get("recipes");
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad RecipesPage');
-  }
+  onOpenRecipe(recipe){
+    this.recipeTouched = recipe;
 
-  onOpenRecipe(url: string){
     const browserOptions: ThemeableBrowserOptions = {
       statusbar: {
           color: '#FF8C00'
@@ -52,10 +60,24 @@ export class RecipesPage {
       backButtonCanClose: true
     };
     
-    const browser: ThemeableBrowserObject = this.themeableBrowser.create(url, '_blank', browserOptions);
+    const browser: ThemeableBrowserObject = this.themeableBrowser.create(recipe.source_url, '_blank', browserOptions);
 
     browser.on('favPressed').subscribe(data => {
-      browser.close();
+      this.database.addRecipe(recipe.title, recipe.source_url, recipe.image_url)
+      .then( (data) => {
+        this.toast.show('Receta guardada', '3000', 'center').subscribe(
+          toast => {
+            this.navCtrl.popToRoot();
+          }
+        );
+      }, (error) => {
+        this.toast.show('Error', '3000', 'center').subscribe(
+          toast => {
+            this.navCtrl.popToRoot();
+          }
+        );
+        console.log(error);
+      });
     });
   }
 

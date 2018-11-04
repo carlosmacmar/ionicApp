@@ -13,6 +13,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { Proveedor1Provider } from '../providers/proveedor1/proveedor1';
 import { HttpClientModule } from "@angular/common/http";
 import { ThemeableBrowser } from "@ionic-native/themeable-browser";
+import { SQLite } from '@ionic-native/sqlite';
+import { Toast } from '@ionic-native/toast';
+import { DatabaseProvider } from '../providers/database/database';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,10 @@ import { ThemeableBrowser } from "@ionic-native/themeable-browser";
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Proveedor1Provider,
-    ThemeableBrowser
+    ThemeableBrowser,
+    SQLite,
+    Toast,
+    DatabaseProvider
   ]
 })
 export class AppModule {}
