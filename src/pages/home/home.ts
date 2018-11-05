@@ -23,8 +23,8 @@ export class HomePage {
 
   onSearch(){
     this.presentLoadingDefault();
-
-    this.proveedor.getRecipes(this.ingredients.replace(/\s/g, ""))
+    if(this.ingredients){
+      this.proveedor.getRecipes(this.ingredients.replace(/\s/g, ""))
       .subscribe(
         (data) => {
           this.recipes = data['recipes'];
@@ -40,6 +40,11 @@ export class HomePage {
         },
         (error) => {console.log(error);}
       )
+    }
+    else{
+      this.loading.dismiss();
+      this.basicAlert("Error", "Escribe algo por favor")
+    }
   }
 
   basicAlert(title: string, message: string){

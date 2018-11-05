@@ -22,10 +22,10 @@ export class FavsPage {
   }
 
   ionViewDidLoad() {
-       
-  }
 
-  ionViewWillEnter() {
+  }
+  
+  ionViewWillEnter(){
     setTimeout(() => {
       this.database.getAllRecipes().then( (data) => {
         this.recipesFav = data;
@@ -77,6 +77,7 @@ export class FavsPage {
       {
         this.database.deleteRecipe(recipe.source_url)
         .then( (data) => {
+          this.navCtrl.setRoot(this.navCtrl.getActive().component); //Refresh view
           this.toast.show('Receta eliminada de favoritos', '3000', 'center').subscribe(
             toast => {}
           );
