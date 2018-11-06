@@ -18,7 +18,6 @@ export class HomePage {
               public alerta: AlertController,
               public proveedor: Proveedor1Provider,
               public loadingCtrl: LoadingController) {
- 
   }
 
   onSearch(){
