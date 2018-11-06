@@ -9,7 +9,6 @@ import { Proveedor1Provider } from "../../providers/proveedor1/proveedor1";
 })
 export class HomePage {
 
-  usuarios
   ingredients
   recipes
   loading
